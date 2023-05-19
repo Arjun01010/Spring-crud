@@ -94,26 +94,26 @@ public class DepartmentController {
 
     @PostMapping("excel")
     public String excelReader(@RequestParam("file") MultipartFile excel) {
-        Department tempStudent = new Department();
+        List<Department> tempStudentList = new ArrayList<Department>();
 
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(excel.getInputStream());
             XSSFSheet sheet = workbook.getSheetAt(0);
 
-            //for(int i=0; i<sheet.getPhysicalNumberOfRows();i++) {
-                XSSFRow row = sheet.getRow(0);
-//                for(int j=0;j<row.getPhysicalNumberOfCells();j++) {
-//                    System.out.print(row.getCell(j) +" ");
-//
-//                }
+            for(int i=0; i<sheet.getPhysicalNumberOfRows();i++) {
+                Department tempStudent = new Department();
+                XSSFRow row = sheet.getRow(i);
+
                 tempStudent.setDepartmentId((long) row.getCell(0).getNumericCellValue());
                 tempStudent.setDepartmentName(row.getCell(1).getStringCellValue());
                 tempStudent.setDepartmentAddress(row.getCell(2).getStringCellValue());
                 tempStudent.setDepartmentCode(row.getCell(3).getStringCellValue());
                 System.out.println("");
+                tempStudentList.add(tempStudent);
 
-            //}
-            departmentService.saveDepartment(tempStudent); 
+            }
+            departmentService.saveAllDepartment(tempStudentList);
+            //working now
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
