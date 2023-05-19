@@ -81,6 +81,40 @@ public class DepartmentController {
                 department, departmentId);
     }
 
+    @PutMapping("/excel/{id}")
+    public Department updateDepartmentByFile(@RequestParam("file") MultipartFile excel, @PathVariable("id") Long departmentId)
+    {
+       // List<Department> tempStudentList = new ArrayList<Department>();
+        Department tempStudent = new Department();
+
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook(excel.getInputStream());
+            XSSFSheet sheet = workbook.getSheetAt(0);
+
+            for(int i=0; i<sheet.getPhysicalNumberOfRows();i++) {
+
+                XSSFRow row = sheet.getRow(i);
+
+                tempStudent.setDepartmentId((long) row.getCell(0).getNumericCellValue());
+                tempStudent.setDepartmentName(row.getCell(1).getStringCellValue());
+                tempStudent.setDepartmentAddress(row.getCell(2).getStringCellValue());
+                tempStudent.setDepartmentCode(row.getCell(3).getStringCellValue());
+                System.out.println("");
+                //tempStudentList.add(tempStudent);
+
+            }
+            //departmentService.saveAllDepartment(tempStudentList);
+            //working now
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+        return departmentService.updateDepartment(tempStudent, departmentId);
+    }
+
     // Delete operation
     @DeleteMapping("/departments/{id}")
     public String deleteDepartmentById(@PathVariable("id")
