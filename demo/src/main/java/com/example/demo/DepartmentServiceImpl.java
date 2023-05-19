@@ -18,6 +18,11 @@ public class DepartmentServiceImpl implements DepartmentService{
         return departmentRepository.save(department);
     }
 
+    @Override
+    public Iterable<Department> saveAllDepartment(List<Department> department) {
+        return departmentRepository.saveAll(department);
+    }
+
     // read operation
     @Override
     public List<Department> fetchDepartmentList() {

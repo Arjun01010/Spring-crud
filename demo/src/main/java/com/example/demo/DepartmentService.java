@@ -9,6 +9,8 @@ public interface DepartmentService {
     // save operation
     Department saveDepartment(Department department);
 
+    Iterable<Department> saveAllDepartment(List<Department> department);
+
     // read operation
     List<Department> fetchDepartmentList();
 
