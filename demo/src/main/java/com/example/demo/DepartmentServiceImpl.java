@@ -31,20 +31,20 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     // update operation
     @Override
-    public Department updateDepartment(Department department, Long departmentId) {
-        Department depDB = departmentRepository.findById(departmentId).get();
+    public Department updateDepartment(Department department, Long isbnId) {
+        Department depDB = departmentRepository.findById(isbnId).get();
 
-        if (Objects.nonNull(department.getDepartmentName()) && !"".equalsIgnoreCase(department.getDepartmentName())) {
-            depDB.setDepartmentName(department.getDepartmentName());
+        if (Objects.nonNull(department.getUrl()) && !"".equalsIgnoreCase(department.getUrl())) {
+            depDB.setUrl(department.getUrl());
         }
 
-        if (Objects.nonNull(department.getDepartmentAddress()) && !"".equalsIgnoreCase(department.getDepartmentAddress())) {
-            depDB.setDepartmentAddress(department.getDepartmentAddress());
-        }
+        // if (Objects.nonNull(department.getDepartmentAddress()) && !"".equalsIgnoreCase(department.getDepartmentAddress())) {
+        //     depDB.setDepartmentAddress(department.getDepartmentAddress());
+        // }
 
-        if (Objects.nonNull(department.getDepartmentCode()) && !"".equalsIgnoreCase(department.getDepartmentCode())) {
-            depDB.setDepartmentCode(department.getDepartmentCode());
-        }
+        // if (Objects.nonNull(department.getDepartmentCode()) && !"".equalsIgnoreCase(department.getDepartmentCode())) {
+        //     depDB.setDepartmentCode(department.getDepartmentCode());
+        // }
 
         return departmentRepository.save(depDB);
     }

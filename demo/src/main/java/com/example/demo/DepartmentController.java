@@ -74,11 +74,11 @@ public class DepartmentController {
     @PutMapping("/departments/{id}")
     public Department
     updateDepartment(@RequestBody Department department,
-                     @PathVariable("id") Long departmentId)
+                     @PathVariable("isbn") Long isbn)
     {
 
         return departmentService.updateDepartment(
-                department, departmentId);
+                department, isbn);
     }
 
     @PutMapping("/excel/{id}")
@@ -95,10 +95,13 @@ public class DepartmentController {
 
                 XSSFRow row = sheet.getRow(i);
 
-                tempStudent.setDepartmentId((long) row.getCell(0).getNumericCellValue());
-                tempStudent.setDepartmentName(row.getCell(1).getStringCellValue());
-                tempStudent.setDepartmentAddress(row.getCell(2).getStringCellValue());
-                tempStudent.setDepartmentCode(row.getCell(3).getStringCellValue());
+                tempStudent.setIsbn((long) row.getCell(0).getNumericCellValue());
+                tempStudent.setUrl(row.getCell(1).getStringCellValue());
+
+                // tempStudent.setDepartmentId((long) row.getCell(0).getNumericCellValue());
+                // tempStudent.setDepartmentName(row.getCell(1).getStringCellValue());
+                // tempStudent.setDepartmentAddress(row.getCell(2).getStringCellValue());
+                // tempStudent.setDepartmentCode(row.getCell(3).getStringCellValue());
                 System.out.println("");
                 //tempStudentList.add(tempStudent);
 
@@ -118,15 +121,15 @@ public class DepartmentController {
     // Delete operation
     @DeleteMapping("/departments/{id}")
     public String deleteDepartmentById(@PathVariable("id")
-                                       Long departmentId)
+                                       Long isbn)
     {
 
         departmentService.deleteDepartmentById(
-                departmentId);
+                isbn);
         return "Deleted Successfully";
     }
 
-    @PostMapping("excel")
+    @PostMapping("/excel")
     public String excelReader(@RequestParam("file") MultipartFile excel) {
         List<Department> tempStudentList = new ArrayList<Department>();
 
@@ -138,10 +141,9 @@ public class DepartmentController {
                 Department tempStudent = new Department();
                 XSSFRow row = sheet.getRow(i);
 
-                tempStudent.setDepartmentId((long) row.getCell(0).getNumericCellValue());
-                tempStudent.setDepartmentName(row.getCell(1).getStringCellValue());
-                tempStudent.setDepartmentAddress(row.getCell(2).getStringCellValue());
-                tempStudent.setDepartmentCode(row.getCell(3).getStringCellValue());
+                tempStudent.setIsbn((long) row.getCell(0).getNumericCellValue());
+                tempStudent.setUrl(row.getCell(1).getStringCellValue());
+                
                 System.out.println("");
                 tempStudentList.add(tempStudent);
 

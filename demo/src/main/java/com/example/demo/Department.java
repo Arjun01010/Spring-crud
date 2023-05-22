@@ -11,16 +11,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "department")
+@Table(name = "isbn")
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long departmentId;
-    @Column(name = "departmentName")
-    private String departmentName;
-    @Column(name = "departmentAddress")
-    private String departmentAddress;
-    @Column(name = "departmentCode")
-    private String departmentCode;
+    @Column(name = "ISBN")
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    private Long isbn;
+    
+    @Column(name = "URL")
+    private String url;
+    
+    // private String departmentAddress;
+    // @Column(name = "departmentCode")
+    // private String departmentCode;
 }
