@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.UrlFilenameViewController;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +22,10 @@ import java.util.logging.Logger;
 
 // Class
 public class DepartmentController {
+
+    WebClient webClient = WebClient.create();
+
+    // AsyncRestTemplate restTemplate = new AsyncRestTemplate();
 
 //    private Logger logger = LoggerFactory.getLogger(File.class);
 
@@ -56,11 +61,18 @@ public class DepartmentController {
         return departmentService.fetchDepartmentList();
     }
 
+    @GetMapping("/service")
+    public String fetchServices()
+    {
+
+        return "some data";
+    }
+
     @GetMapping("/")
     public String fetchBase()
     {
 
-        return "Hello";
+        return "Hello again";
     }
 
 //    @GetMapping("/departments/{id}")
