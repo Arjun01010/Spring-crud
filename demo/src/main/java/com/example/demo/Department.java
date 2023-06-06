@@ -22,6 +22,7 @@ public class Department {
     @Column(name = "URL")
     private String url;
     
+    
     // private String departmentAddress;
     // @Column(name = "departmentCode")
     // private String departmentCode;

@@ -25,6 +25,7 @@ public class ConcurrentRunner implements CommandLineRunner {
 
         for (int i = 0; i < 10; i++) {
             allFutures.add(callerClass.callOtherService());
+            allFutures.add(callerClass.callAPICalls(i));
         }
 
         CompletableFuture.allOf(allFutures.toArray(new CompletableFuture[0])).join();

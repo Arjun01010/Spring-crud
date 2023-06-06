@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService{
@@ -56,8 +57,17 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public List<Department> fetchDepartmentById() {
-        return null;
+    public Optional<Department> fetchDepartmentById(Long isbnId) {
+
+        return departmentRepository.findById(isbnId);
+    }
+
+    @Override
+    public String fetchTitle(Long isbnId) {
+        Optional<Department> temp = departmentRepository.findById(isbnId);
+        //temp = departmentRepository.findById(isbnId);
+        //String title = temp.get('URL')
+        return "string";
     }
 
 }

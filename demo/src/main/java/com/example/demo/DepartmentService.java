@@ -1,8 +1,7 @@
 package com.example.demo;
 
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Optional;
 
 
 public interface DepartmentService {
@@ -20,6 +19,8 @@ public interface DepartmentService {
     // delete operation
     void deleteDepartmentById(Long departmentId);
 
-    List<Department> fetchDepartmentById();
+    Optional<Department> fetchDepartmentById(Long isbnId);
+
+    String fetchTitle(Long isbnId);
 }
 
